@@ -1,0 +1,1 @@
+Select how often the top poster is calculated (and cached).

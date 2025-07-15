@@ -1,18 +1,38 @@
 {
-    "public/tpm.less": {
-        "version_id": 20070,
-        "version_string": "1.4.0",
-        "hash": "26efa80964feae028766936cd61f2fd8"
-    },
     "public/tpm_list.html": {
         "version_id": 20070,
         "version_string": "1.4.0",
         "hash": "012e51e3afe68ea60f65b3e76ffa3ae5"
     },
+    "public/tpm_sidebar_icon.less": {
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "165299e6a51d2c9e8937f64323526552"
+    },
     "public/tpm_sidebar_results.html": {
         "version_id": 20070,
         "version_string": "1.4.0",
         "hash": "e70c1cbc3cc64bf0dd2ee086d075cb13"
+    },
+    "public/tpm_user_banner.less": {
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "fffa8bd24e44f4e2ef302ee692624d75"
+    },
+    "public/tpm_user_banner_icon_1.less": {
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "fcf90723ac6c9dd33cc686d26ddd3f36"
+    },
+    "public/tpm_user_banner_icon_2.less": {
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "b4aa910562731774b2cc0c0dc2c661ec"
+    },
+    "public/tpm_user_banner_icon_3.less": {
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "330fb52c172bb7efffff5a4e34751b48"
     },
     "public/widget_tpm.html": {
         "version_id": 20070,

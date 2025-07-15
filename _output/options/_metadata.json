@@ -1,4 +1,10 @@
 {
+    "tpm_awardTrophyCount.json": {
+        "hash": "9eed09e2377b64c037e0d36c1aa05d7b"
+    },
+    "tpm_cron_schedule.json": {
+        "hash": "5a59b38dcaa1fbc71781d320b49236c0"
+    },
     "tpm_excludeNodes.json": {
         "hash": "8a749593fd14ac2841aa2e73fe724108"
     },
@@ -6,9 +12,9 @@
         "hash": "a30d7bf2aaa6143f4aeda15f6af3a9a2"
     },
     "tpm_limitTPM.json": {
-        "hash": "3775cf89f17b74b41980dfee0aec6558"
+        "hash": "1973e4723902b0092924e6ad0c07a24e"
     },
     "tpm_showBanner.json": {
-        "hash": "bfad8fdcd155edb5f9888367ca54bd0d"
+        "hash": "7fbb32fb55e12f99a1d20e4dc65dc14a"
     }
 }

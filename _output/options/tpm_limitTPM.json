@@ -6,8 +6,9 @@
     "validation_class": "",
     "validation_method": "",
     "advanced": false,
-    "default_value": "10",
+    "default_value": "20",
     "relations": {
-        "tpm": 30
+        "tpm": 800,
+        "wutime_lgv_option_group": 1
     }
 }

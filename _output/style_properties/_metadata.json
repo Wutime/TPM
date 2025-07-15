@@ -1,11 +1,23 @@
 {
-    "tpmBannerIcon.json": {
-        "hash": "130b22941e10cb1fb10a37c0372215a0"
+    "tpmBannerIcon1.json": {
+        "hash": "f096607e125643a9221411018427c5d6"
+    },
+    "tpmBannerIcon2.json": {
+        "hash": "07c7e04ebf9fa39d9fba5df3e4f6aa02"
+    },
+    "tpmBannerIcon3.json": {
+        "hash": "e0f3e47a25bab4bbc896b19f7aad5988"
     },
     "tpmSidebarIcon.json": {
         "hash": "28235f36c1c812d0823fc5c2d43e36cf"
     },
-    "tpm_user_banner.json": {
-        "hash": "fbdf65031fc89442071c8fdcc14dbdeb"
+    "tpmUserBanner1.json": {
+        "hash": "9f7f4700db8587e607465284db79a868"
+    },
+    "tpmUserBanner2.json": {
+        "hash": "3bb1c006d10843449c49881ee7867ce1"
+    },
+    "tpmUserBanner3.json": {
+        "hash": "bee4a914a2b3365b8a252fa28c03cbd1"
     }
 }

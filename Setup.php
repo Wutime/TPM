@@ -15,16 +15,19 @@ class Setup extends AbstractSetup
 
     public function installStep1()
     {
-        $this->createWidget(
-            'tpm_widget_forumlist_sidebar',
-            'tpm_widget',
-            [
-                'positions' => [
-                    'forum_list_sidebar' => 100
-                ]
-            ],
-            'tpm_widget_title'
-        );
+		$this->createWidget(
+		    'tpm_widget_forumlist_sidebar',
+		    'tpm_widget',
+		    [
+		        'positions' => [
+		            'forum_list_sidebar' => 100
+		        ]
+		    ],
+		);
+    }
+    public function installStep2()
+    {
+    	\Wutime\TPM\Cron\TPM::runGenerateTPM(null, true); // Generate initial cache
     }
 
     public function uninstallStep1()

@@ -1,0 +1,9 @@
+.userBanner.userBanner--tpm-2:before {
+    <xf:if is="$xf.versionId < 2030000">
+        .m-faBase();
+    </xf:if>
+	.m-faContent(@xf-tpmBannerIcon2, true);
+    margin-right: @xf-paddingSmall;
+	font-weight: 900;
+	color:silver;
+}

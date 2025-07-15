@@ -1,0 +1,13 @@
+{
+    "edit_format": "radio",
+    "edit_format_params": "1=One Top Poster\n3=Gold, Silver, Bronze",
+    "data_type": "string",
+    "sub_options": [],
+    "validation_class": "",
+    "validation_method": "",
+    "advanced": false,
+    "default_value": "3",
+    "relations": {
+        "tpm": 10
+    }
+}

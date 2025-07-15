@@ -1,0 +1,26 @@
+{
+    "group_name": "tpm",
+    "title": "userBanner #3",
+    "description": "",
+    "property_type": "css",
+    "css_components": [
+        "text",
+        "background",
+        "border",
+        "border_radius",
+        "padding",
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "has_variations": false,
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "color": "@xf-textColor",
+        "background-color": "@xf-contentBg",
+        "border-width": "1px",
+        "border-color": "@xf-borderColorFaint"
+    },
+    "display_order": 300
+}

@@ -1,6 +1,6 @@
 {
     "group_name": "tpm",
-    "title": "TPM Banner Style",
+    "title": "userBanner #2",
     "description": "",
     "property_type": "css",
     "css_components": [
@@ -17,12 +17,10 @@
     "depends_on": "",
     "value_group": "",
     "property_value": {
-        "color": "@xf-majorHeadingTextColor",
-        "background-color": "@xf-contentHighlightBg",
+        "color": "@xf-textColor",
+        "background-color": "@xf-contentBg",
         "border-width": "1px",
-        "border-color": "@xf-borderColorHighlight",
-        "border-radius": "2px",
-        "padding": "4px"
+        "border-color": "@xf-borderColorFaint"
     },
     "display_order": 200
 }

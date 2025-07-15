@@ -1,0 +1,14 @@
+{
+    "group_name": "tpm",
+    "title": "userBanner #3 Icon",
+    "description": "",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "string",
+    "value_parameters": "",
+    "has_variations": false,
+    "depends_on": "",
+    "value_group": "userBanner",
+    "property_value": "@fa-var-solid-trophy",
+    "display_order": 3
+}

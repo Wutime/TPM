@@ -1,0 +1,9 @@
+{
+    "template": "app_user_banners.less",
+    "description": "CSS",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/$/",
+    "replace": "{{ include('tpm_user_banner.less') }}\n\n<xf:if is=\"property('tpmBannerIcon1') != ''\">\n    {{ include('tpm_user_banner_icon_1.less') }}\n</xf:if>\n\n<xf:if is=\"property('tpmBannerIcon2') != ''\">\n    {{ include('tpm_user_banner_icon_2.less') }}\n</xf:if>\n\n<xf:if is=\"property('tpmBannerIcon3') != ''\">\n    {{ include('tpm_user_banner_icon_3.less') }}\n</xf:if>\n\n<xf:if is=\"property('tpmSidebarIcon') != ''\">\n    {{ include('tpm_sidebar_icon.less') }}\n</xf:if>"
+}

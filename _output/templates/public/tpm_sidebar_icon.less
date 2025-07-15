@@ -1,0 +1,9 @@
+.block[data-widget-definition="tpm_widget"] .block-minorHeader::before {
+    <xf:if is="$xf.versionId < 2030000">
+        .m-faBase();
+    </xf:if>
+	.m-faContent(@xf-tpmSidebarIcon, false);
+    font-size: @xf-fontSizeLarge;
+    margin-right: @xf-paddingMedium;
+    color: inherit;
+}

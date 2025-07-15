@@ -1,21 +1,29 @@
 v2.0.0
 
-TPM port to resolve past issues
+* TPM port to resolve all past issues, and all issues in XF 2.3.x *
 
-proper XenForo 2.3.x Ajax handling with <xf:form> for widget
-smooth animation for widget updating
-made the banner style for Top Monthly Poster obey light/dark system in XF 2.3.6
-made the banner style a styleProperty() for ease of customization
-made the banner icon a style property (defaults to @fa-var-trophy)
-made the sidebar icon a style property (defaults to @fa-var-trophy)
-added phrase for tpm_banner_text for "Top Monthly Poster" to prevent wrap on small screens
+* Tested with XF 2.3.6 and back tested to XF 2.2.16 *
+
+fixed broken css, all broken JS, and updated to Native JavaScript for XF 2.3.x
+resolves all previous client-side JS errors in XF 2.3.x
+optimized for XenForo 2.3.x Ajax handling with <xf:form> for widget
 fixed css issues and ported them to XF 2.3.x
 fixed compact layout template to properly render "no results found"
-fixed all js errors (previous version had constant client-side JS errors in XF 2.3.x)
-fixed javascript path to a fully namespaced js route
+smooth animation for widget updating
+made the banner style for Top Monthly Poster obey light/dark system in XF 2.3.6
+made the banner styles all styleProperties() for ease of customization
+made the banner icon a style property (defaults to @fa-var-trophy)
+made the sidebar icon a style property (defaults to @fa-var-trophy)
+introduced on-request caching in controllers for totals and lists of past months/years, skipping current month for freshness
+optimized sql query for efficiency, avoiding full row fetches
+top posters cache can be scheduled by option: hourly, quarterly, twice per day or daily
+fixed conditionally include <xf:if is="$xf.versionId < 2030000">.m-faBase();</xf:if> for FA icons if XF < 2.3
+fixed installer to setup cache immediately
 fixed widget title in installer to correctly use a phrase variable so the widget title is optional
-fixed "no results found" message for all layout styles (was missing for compact previously)
+fixed "no results found" message for compact widget layout
 fixed permission for "View TPM Page" to "View TPM" as it determines access to both the page and the widget
+fixed userBanner Html and added styles for 3x userBanner's
+removed redundant/unneccesary styles from extra.less
 added uglifyjs() to build minified JS automatically now that XF 2.3.x compilier no longer supports minification (EOL)
 
 Instructions:
@@ -23,11 +31,11 @@ Instructions:
 1) Uninstall previous TPM addons (No worries, you won't lose poster any poster data & weblinks have stayed the same for SEO)
 2) Install this Add-On
 3) Visit UserGroup permissions: admin.php?permissions/user-groups/registered.2/
-	* Click "registered users" (logged in users only) or "unregsitered/unconfirmed" (guests + users)
-	* Search "top"
-	* Enable [View "Top Posters of the Month" Page]
-	* Enable [Can change "Top Posters of the Month" Date]
-4) Done
+	* Click "registered users" and search for the word "top"
+	* Enable [View "Top Posters of the Month" Page] permission
+	* Enable [Can change "Top Posters of the Month" Date] permission
+4) Repeat #3 if you want this visible to "Unregistered / Unconfirmed"
+5) Done
 
 Customization:
 

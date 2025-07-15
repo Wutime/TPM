@@ -8,6 +8,6 @@
     "advanced": false,
     "default_value": "1",
     "relations": {
-        "tpm": 200
+        "tpm": 1
     }
 }

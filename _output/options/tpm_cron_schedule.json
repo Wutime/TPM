@@ -1,0 +1,13 @@
+{
+    "edit_format": "radio",
+    "edit_format_params": "hourly=Hourly\nfour_hour=Every 4 Hours\ntwice_daily=Twice Daily\ndaily=Daily",
+    "data_type": "string",
+    "sub_options": [],
+    "validation_class": "",
+    "validation_method": "",
+    "advanced": false,
+    "default_value": "four_hour",
+    "relations": {
+        "tpm": 900
+    }
+}

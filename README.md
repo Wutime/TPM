@@ -17,7 +17,7 @@ This add-on displays the **Top Posters of the Month** on your XenForo forum, hig
 
 3. **Set User Group Permissions:**  
    Go to: `admin.php?permissions/user-groups/registered.2/`  
-   - Select the relevant user group (e.g., "Registered Users" for logged-in members or "Unregistered/Unconfirmed" for guests and new users)  
+   - Select the relevant user group (e.g., "Registered Users" for logged-in members or "Unregistered/Unconfirmed" for guests)  
    - Search for **"top"**  
    - Enable the following permissions:  
      - **View "Top Posters of the Month" Page**  

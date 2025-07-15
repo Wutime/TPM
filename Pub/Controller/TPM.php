@@ -6,62 +6,67 @@ use XF\Mvc\ParameterBag;
 
 class TPM extends \XF\Pub\Controller\AbstractController
 {
-	public function actionIndex(ParameterBag $params)
-	{
-        if( !\XF::visitor()->canViewTPM())
-        {
+    public function actionIndex(ParameterBag $params)
+    {
+        if (!\XF::visitor()->canViewTPM()) {
             return $this->noPermission();
         }
 
         $this->assertCanonicalUrl($this->buildLink('members/tpm'));
 
-        $users = [];
-        $oldestMonth = 1;
         $db = \XF::db();
 
-        $monthNow = date("n", \XF::$time);
-        $yearNow = date("Y", \XF::$time);
+        $monthNow = date('m', \XF::$time);
+        $yearNow = date('Y', \XF::$time);
 
-        $oldestYear = $yearNow;
-
-        $oldesYearTimestamp = \XF::db()->fetchOne('SELECT MIN(post_date) FROM xf_post');
-
-        if($oldesYearTimestamp)
-        {
-            $oldestYear = date("Y", $oldesYearTimestamp);
-            $oldestMonth = date("n", $oldesYearTimestamp);
-        }
+        $oldestTimestamp = $db->fetchOne('SELECT MIN(post_date) FROM xf_post') ?: \XF::$time;
+        $oldestYear = date('Y', $oldestTimestamp);
+        $oldestMonth = date('m', $oldestTimestamp);
 
         $years = range($oldestYear, $yearNow);
 
-        //Teste ob es nur ein Jahr gibt
-        $allMonths = range(1, 12);
-        if(count($years) == 1)
-        {
-            $allMonths = range($oldestMonth, $monthNow);
-        }
-
+        $allMonths = ($oldestYear == $yearNow) ? range($oldestMonth, $monthNow) : range(1, 12);
         $months = [];
-        foreach ($allMonths as $allMonth)
-        {
-            $phrase = \XF::phrase('month_' . $allMonth);
-            $months[$allMonth] = $phrase->render();
+        foreach ($allMonths as $m) {
+            $phrase = \XF::phrase('month_' . $m);
+            $months[$m] = $phrase->render();
         }
 
         $tpmYear = $this->filter('tpm_year', 'uint');
         $tpmMonth = $this->filter('tpm_month', 'uint');
 
-        $searchYear = ($tpmYear ? $tpmYear : $yearNow);
-        $searchMonth = ($tpmMonth ? $tpmMonth : $monthNow);
+        $searchYear = $tpmYear ?: $yearNow;
+        $searchMonth = $tpmMonth ?: $monthNow;
 
         $page = $this->filterPage();
         $perPage = $this->options()->tpm_limitTPM;
 
-        $topPostersSql = \Wutime\TPM\Util\Helper::getTPMSql($page, $perPage, $searchMonth, $searchYear);
-        $topPosters = $db->fetchAll($topPostersSql);
+        $isPast = ($searchYear < $yearNow) || ($searchYear == $yearNow && $searchMonth < $monthNow);
 
-        $topPostersTotalSql = \Wutime\TPM\Util\Helper::getTPMSqlTotal($searchMonth, $searchYear);
-        $topPostersTotal = $db->fetchAll($topPostersTotalSql);
+        $cache = \XF::app()->simpleCache();
+        $namespace = 'Wutime/TPM';
+
+        // Total
+        $totalCacheKey = 'tpm_total_' . $searchYear . '_' . $searchMonth;
+        $total = $cache->getValue($namespace, $totalCacheKey);
+        if ($total === null || !$isPast) {
+            $totalSql = \Wutime\TPM\Util\Helper::getTPMSqlTotal($searchMonth, $searchYear);
+            $total = $db->fetchOne($totalSql);
+            if ($isPast) {
+                $cache->setValue($namespace, $totalCacheKey, $total);
+            }
+        }
+
+        // Paginated list
+        $listCacheKey = 'tpm_list_' . $searchYear . '_' . $searchMonth . '_' . $page . '_' . $perPage;
+        $topPosters = $cache->getValue($namespace, $listCacheKey);
+        if ($topPosters === null || !$isPast) {
+            $listSql = \Wutime\TPM\Util\Helper::getTPMSql($page, $perPage, $searchMonth, $searchYear);
+            $topPosters = $db->fetchAll($listSql);
+            if ($isPast) {
+                $cache->setValue($namespace, $listCacheKey, $topPosters);
+            }
+        }
 
         $userDatas = \Wutime\TPM\Util\Helper::getUserData($topPosters);
 
@@ -74,7 +79,7 @@ class TPM extends \XF\Pub\Controller\AbstractController
         ];
 
         $viewParams = [
-            'total' => count($topPostersTotal),
+            'total' => $total,
             'page' => $page,
             'perPage' => $perPage,
 
@@ -85,25 +90,23 @@ class TPM extends \XF\Pub\Controller\AbstractController
             'years' => $years,
             'months' => $months,
 
-            'users' => $users,
+            'users' => [], // Unused in code, remove if not needed
             'user_datas' => $userDatas,
             'linkFilters' => $linkFilters,
         ];
 
-		return $this->view('Wutime\TPM:TPMList', 'tpm_list', $viewParams);
-	}
+        return $this->view('Wutime\TPM:TPMList', 'tpm_list', $viewParams);
+    }
 
-	public function actionSidebar()
+    public function actionSidebar()
     {
-        if (!$this->request->isXhr())
-        {
+        if (!$this->request->isXhr()) {
             return $this->redirect($this->buildLink('index'));
         }
 
         $visitor = \XF::visitor();
 
-        if (!$visitor->canViewTPM() || !$visitor->canChangeTPMDate())
-        {
+        if (!$visitor->canViewTPM() || !$visitor->canChangeTPMDate()) {
             return $this->noPermission();
         }
 
@@ -114,24 +117,43 @@ class TPM extends \XF\Pub\Controller\AbstractController
 
         $db = \XF::db();
 
-        $monthNow = date("n", \XF::$time);
-        $yearNow = date("Y", \XF::$time);
+        $monthNow = date('m', \XF::$time);
+        $yearNow = date('Y', \XF::$time);
 
-        $searchYear = ($tpmYear ? $tpmYear : $yearNow);
-        $searchMonth = ($tpmMonth ? $tpmMonth : $monthNow);
+        $searchYear = $tpmYear ?: $yearNow;
+        $searchMonth = $tpmMonth ?: $monthNow;
 
-        $topPostersSql = \Wutime\TPM\Util\Helper::getTPMSql(null, $tpmLimit, $searchMonth, $searchYear);
+        $isPast = ($searchYear < $yearNow) || ($searchYear == $yearNow && $searchMonth < $monthNow);
 
+        $cache = \XF::app()->simpleCache();
+        $namespace = 'Wutime/TPM';
 
-        $topPosters = $db->fetchAll($topPostersSql);
+        // Total
+        $totalCacheKey = 'tpm_total_' . $searchYear . '_' . $searchMonth;
+        $total = $cache->getValue($namespace, $totalCacheKey);
+        if ($total === null || !$isPast) {
+            $totalSql = \Wutime\TPM\Util\Helper::getTPMSqlTotal($searchMonth, $searchYear);
+            $total = $db->fetchOne($totalSql);
+            if ($isPast) {
+                $cache->setValue($namespace, $totalCacheKey, $total);
+            }
+        }
 
-        $topPostersTotalSql = \Wutime\TPM\Util\Helper::getTPMSqlTotal($searchMonth, $searchYear);
-        $topPostersTotal = $db->fetchAll($topPostersTotalSql);
+        // Limited list (top N)
+        $listCacheKey = 'tpm_sidebar_' . $searchYear . '_' . $searchMonth . '_' . $tpmLimit;
+        $topPosters = $cache->getValue($namespace, $listCacheKey);
+        if ($topPosters === null || !$isPast) {
+            $listSql = \Wutime\TPM\Util\Helper::getTPMSql(null, $tpmLimit, $searchMonth, $searchYear);
+            $topPosters = $db->fetchAll($listSql);
+            if ($isPast) {
+                $cache->setValue($namespace, $listCacheKey, $topPosters);
+            }
+        }
 
         $userDatas = \Wutime\TPM\Util\Helper::getUserData($topPosters);
 
         $viewParams = [
-            'total' => count($topPostersTotal),
+            'total' => $total,
 
             'month_now' => $searchMonth,
             'year_now' => $searchYear,

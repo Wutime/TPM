@@ -6,115 +6,84 @@ class Helper
 {
     public static function getTPMSql($page = null, $perPage = 10, $searchMonth = 0, $searchYear = 0)
     {
-        $offset = '';
-        $limit = $perPage;
-
-        if($page !== null)
-        {
-            $page = intval($page);
-            if ($page < 1)
-            {
-                $page = 1;
-            }
-
-            $perPage = intval($perPage);
-            if ($perPage < 1)
-            {
-                $perPage = 1;
-            }
-
-            $offset = ($page - 1) * $perPage . ',';
-        }
-
-        $startDate = gmmktime(0,0,0, $searchMonth,1, $searchYear);
-        $endData = gmmktime(0,0,0,$searchMonth + 1,1, $searchYear);
+        $startDate = gmmktime(0, 0, 0, $searchMonth, 1, $searchYear);
+        $endDate = gmmktime(0, 0, 0, $searchMonth + 1, 1, $searchYear); // Fixed var name
 
         list($excludeNodesSql, $excludeUserGroupsSql, $excludeUsersSql) = self::getWhereSql();
 
-        return "SELECT COUNT(post.post_date) AS topposts, post.user_id
-				FROM xf_post AS post
-				LEFT JOIN xf_user AS user USING(user_id)
-				LEFT JOIN xf_thread AS thread USING(thread_id)
-				WHERE 
-				    post.message_state = 'visible' 
+        $sql = "SELECT COUNT(post.post_date) AS topposts, post.user_id
+                FROM xf_post AS post
+                LEFT JOIN xf_user AS user ON (post.user_id = user.user_id)
+                LEFT JOIN xf_thread AS thread ON (post.thread_id = thread.thread_id)
+                WHERE post.message_state = 'visible'
+                AND thread.discussion_state = 'visible'
+                AND post.user_id > 0
+                AND post.post_date > $startDate
+                AND post.post_date < $endDate
+                $excludeNodesSql
+                $excludeUserGroupsSql
+                $excludeUsersSql
+                GROUP BY post.user_id
+                ORDER BY topposts DESC";
 
-                AND 
-                    thread.discussion_state = 'visible' 
-				AND 
-				    post.user_id > 0 
-				    
-				AND 
-				    post.post_date > $startDate
-				AND 
-				    post.post_date < $endData
-				    
-				    $excludeNodesSql
-				    $excludeUserGroupsSql
-				    $excludeUsersSql
+        $limitClause = '';
+        if ($perPage !== 0) { // Support no limit
+            $offset = '';
+            $limit = $perPage;
+            if ($page !== null) {
+                $page = max(1, intval($page));
+                $perPage = max(1, intval($perPage));
+                $offset = (($page - 1) * $perPage) . ', ';
+            }
+            $limitClause = " LIMIT $offset$limit";
+        }
 
-				GROUP BY post.user_id
-				ORDER BY topposts DESC
-								
-				LIMIT $offset $limit";
+        return $sql . $limitClause;
     }
 
     public static function getTPMSqlTotal($searchMonth = 0, $searchYear = 0)
     {
-        $startDate = gmmktime(0,0,0, $searchMonth,1, $searchYear);
-        $endData = gmmktime(0,0,0,$searchMonth + 1,1, $searchYear);
+        $startDate = gmmktime(0, 0, 0, $searchMonth, 1, $searchYear);
+        $endDate = gmmktime(0, 0, 0, $searchMonth + 1, 1, $searchYear);
 
         list($excludeNodesSql, $excludeUserGroupsSql, $excludeUsersSql) = self::getWhereSql();
 
-        return "SELECT COUNT(post.post_date) AS topposts, post.user_id
-				FROM xf_post AS post
-				LEFT JOIN xf_user AS user USING(user_id)
-				LEFT JOIN xf_thread AS thread USING(thread_id)
-				WHERE 
-				    post.message_state = 'visible' 
-				AND 
-				    post.user_id > 0 
-				    
-				AND 
-				    post.post_date > $startDate
-				AND 
-				    post.post_date < $endData
-				    
-				    $excludeNodesSql
-				    $excludeUserGroupsSql
-				    $excludeUsersSql
-
-				GROUP BY post.user_id";
+        return "SELECT COUNT(DISTINCT post.user_id)
+                FROM xf_post AS post
+                LEFT JOIN xf_user AS user ON (post.user_id = user.user_id)
+                LEFT JOIN xf_thread AS thread ON (post.thread_id = thread.thread_id)
+                WHERE post.message_state = 'visible'
+                AND thread.discussion_state = 'visible'
+                AND post.user_id > 0
+                AND post.post_date > $startDate
+                AND post.post_date < $endDate
+                $excludeNodesSql
+                $excludeUserGroupsSql
+                $excludeUsersSql";
     }
 
     public static function getUserData($topPosters)
     {
-        if(empty($topPosters))
+        if (empty($topPosters)) {
             return [];
-
-        $userIds = [];
-
-        foreach ($topPosters as $topPoster)
-        {
-            $userIds[] = $topPoster['user_id'];
         }
 
-        /** @var \XF\Entity\User $user */
+        $userIds = array_column($topPosters, 'user_id');
+
         $users = \XF::em()->findByIds('XF:User', $userIds);
 
-        foreach ($users as $user)
-        {
-            foreach ($topPosters as $topPoster)
-            {
-                if($topPoster['user_id'] == $user->user_id)
-                {
-                    $userDatas[$user->user_id] = [
-                        'value' => $topPoster['topposts'],
-                        'user' => $user
-                    ];
-                }
+        $userDatas = [];
+        foreach ($topPosters as $topPoster) {
+            $userId = $topPoster['user_id'];
+            if (isset($users[$userId])) {
+                $userDatas[$userId] = [
+                    'value' => $topPoster['topposts'],
+                    'user' => $users[$userId]
+                ];
             }
         }
 
+        // Already sorted from SQL, but arsort if needed
         arsort($userDatas);
 
         return $userDatas;
@@ -122,45 +91,31 @@ class Helper
 
     protected static function getWhereSql()
     {
+        $options = \XF::options();
         $db = \XF::db();
 
         $excludeNodesSql = '';
-        $excludeNodes = \XF::options()->tpm_excludeNodes;
-
-        if(isset($excludeNodes[0]) && $excludeNodes[0] != 0)
-        {
+        $excludeNodes = $options->tpm_excludeNodes ?? [];
+        if (!empty($excludeNodes) && $excludeNodes[0] != 0) {
             $excludeNodesSql = ' AND thread.node_id NOT IN (' . $db->quote($excludeNodes) . ')';
         }
 
         $excludeUserGroupsSql = '';
-        $excludeUserGroups = \XF::options()->tpm_excludeUserGroups;
-
-        if(isset($excludeUserGroups[0]) && $excludeUserGroups[0] != 0)
-        {
-            $whereclause = '';
-            foreach($excludeUserGroups as $ugid)
-            {
-                $whereclause = $whereclause . 'AND NOT FIND_IN_SET(' . $ugid . ', user.secondary_group_ids)' . ' ';
+        $excludeUserGroups = $options->tpm_excludeUserGroups ?? [];
+        if (!empty($excludeUserGroups) && $excludeUserGroups[0] != 0) {
+            $whereClause = '';
+            foreach ($excludeUserGroups as $ugid) {
+                $whereClause .= 'AND NOT FIND_IN_SET(' . $ugid . ', user.secondary_group_ids) ';
             }
-
-            $excludeUserGroupsSql =  ' AND (user.user_group_id NOT IN (' . $db->quote($excludeUserGroups) . ') 
-                                         ' . $whereclause . ')';
+            $excludeUserGroupsSql = ' AND (user.user_group_id NOT IN (' . $db->quote($excludeUserGroups) . ') ' . $whereClause . ')';
         }
 
-        //user Exclude
-        $excludeUsers = \XF::options()->tpm_excludeUsers;
-
         $excludeUsersSql = '';
-        if(!empty($excludeUsers))
-        {
+        $excludeUsers = $options->tpm_excludeUsers ?? [];
+        if (!empty($excludeUsers)) {
             $excludeUsersSql = ' AND user.user_id NOT IN (' . $db->quote($excludeUsers) . ')';
         }
 
-        return [
-            $excludeNodesSql,
-            $excludeUserGroupsSql,
-            $excludeUsersSql
-        ];
+        return [$excludeNodesSql, $excludeUserGroupsSql, $excludeUsersSql];
     }
 }
-
