@@ -61,9 +61,9 @@
     },
     "option_group.tpm.txt": {
         "global_cache": false,
-        "version_id": 20070,
-        "version_string": "1.4.0",
-        "hash": "065b6fbcaae049d11fd0c486a28d5c09"
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "0d3f0626c702e54efb03669b6aa413d8"
     },
     "option_group_description.tpm.txt": {
         "global_cache": false,
