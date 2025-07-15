@@ -6,8 +6,6 @@ class TPM
 {
     public static function runGenerateTPM($entry = null, bool $force = false)
     {
-
-    	$force = true;
     	
         if (!$force) {
             $schedule = \XF::options()->tpm_cron_schedule ?? 'daily';
@@ -28,7 +26,6 @@ class TPM
 
                 case 'hourly':
                     // Optional: Remove log if not testing
-                    \XF::logError('Cache ran hourly on schedule.');
                     break;
                 default:
                     // always runs
@@ -64,9 +61,6 @@ class TPM
         // Also cache total for last
         $lastTotal = count($lastFull); // or use COUNT query if not fetching full
         $cache->setValue('Wutime/TPM', 'tpm_total_' . $lastYear . '_' . $lastMonth, $lastTotal);
-
-        // Cache top N for now, top1 for last
-        \XF::logError('runGenerateTPM simpleCache created for Wutime/TPM');
 
         \XF::app()->simpleCache()->setValue('Wutime/TPM', 'tpm', [
             'now' => $topPosters ?: [],
