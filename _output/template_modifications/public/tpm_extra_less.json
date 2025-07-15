@@ -1,0 +1,9 @@
+{
+    "template": "extra.less",
+    "description": "",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/$/",
+    "replace": "{{ include('tpm_extra.less') }}"
+}

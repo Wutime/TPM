@@ -13,6 +13,27 @@
                 </li>
             </xf:if>
         </ul>
+		
+	<xf:elseif is="{$style} == 'avatar'" />
+		
+	        <div class="block-row block-row--minor">
+            <ul class="listInline listInline--comma">
+                <xf:if is="$user_datas is not empty">
+					<ul class="listHeap">
+						<xf:foreach loop="$user_datas" value="$user">
+							<li>
+								<xf:avatar class="tpm-avatar" user="$user.user" size="xs" />
+								<div class="tpm-number">{$user.value|number}</div>
+							</li>
+						</xf:foreach>
+					</ul>
+                  <xf:else />
+				<li class="block-row block-row--minor">
+					{{ phrase('no_results_found') }}
+				</li>
+                </xf:if>
+            </ul>
+        </div>	
 
     <xf:elseif is="{$style} == 'compact'" />
         <ul class="block-body">

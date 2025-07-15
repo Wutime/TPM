@@ -11,7 +11,7 @@
 namespace XF;
 
 /**
- * @property string|null $tpm_awardTrophyCount How Many "Top Posters" This Month
+ * @property string|null $tpm_awardTrophyCount How Many "Top Posters" Awarded
  * @property string|null $tpm_cron_schedule Top Poster Update Schedule
  * @property array{0: string}|null $tpm_excludeNodes Nodes to Exclude From Counting
  * @property array{0: string}|null $tpm_excludeUserGroups Usergroups exclude from Count

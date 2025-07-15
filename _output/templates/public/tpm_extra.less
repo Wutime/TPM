@@ -1,0 +1,40 @@
+.tpm-avatar 
+{
+	margin: 0px 5px 5px 0px;
+}
+
+.tpm-number 
+{
+	.xf-tpmPosterCount();
+	position: absolute;
+}
+
+.tpm-controls
+{
+	.m-listPlain();
+	margin-right: auto;
+
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	min-height: 35px;
+	max-width: 100%;
+
+	> li
+	{
+		display: inline-block;
+		margin-right: 5px;
+
+		&:last-child
+		{
+			margin-right: 0;
+		}
+	}
+}
+
+.button.tpm-goButton
+{
+	font-size: @xf-fontSizeNormal;
+	line-height: 1.5;
+	min-width: 0;
+}

@@ -1,0 +1,33 @@
+{
+    "group_name": "tpm",
+    "title": "Avatar Sidebar Poster Count",
+    "description": "This only affects the 'avatar' sidebar widget layout.",
+    "property_type": "css",
+    "css_components": [
+        "text",
+        "background",
+        "border",
+        "border_radius",
+        "padding",
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "has_variations": false,
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "font-size": "10px",
+        "color": "@xf-textColor",
+        "background-color": "xf-intensify(@xf-contentBg, 3.5%)",
+        "border-width": "@xf-borderSize",
+        "border-color": "xf-diminish(@xf-borderColor, 3%)",
+        "border-radius": "20px",
+        "padding-top": "0",
+        "padding-right": "3px",
+        "padding-bottom": "0",
+        "padding-left": "3px",
+        "extra": "margin: -16px 0px 0px 22px;"
+    },
+    "display_order": 500
+}

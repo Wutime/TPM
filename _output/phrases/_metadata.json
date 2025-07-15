@@ -9,7 +9,7 @@
         "global_cache": false,
         "version_id": 2000000,
         "version_string": "2.0.0",
-        "hash": "6a83fa44a61908bb894e6f907b06b6b0"
+        "hash": "77e48e10a9b068b8ae1c1294cfdb8b9a"
     },
     "option.tpm_cron_schedule.txt": {
         "global_cache": false,
@@ -95,6 +95,12 @@
         "version_string": "2.0.0",
         "hash": "50d5ac0fb087c4fb5fe5d596e154b97c"
     },
+    "style_prop.tpmPosterCount.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "8362db150cbf5f4ad3144dc0e09e5b3f"
+    },
     "style_prop.tpmSidebarIcon.txt": {
         "global_cache": false,
         "version_id": 20070,
@@ -136,6 +142,12 @@
         "version_id": 2000000,
         "version_string": "2.0.0",
         "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "style_prop_desc.tpmPosterCount.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "5dd0bf626db1c74588d0c09fdc3b537c"
     },
     "style_prop_desc.tpmSidebarIcon.txt": {
         "global_cache": false,
@@ -202,5 +214,11 @@
         "version_id": 2000000,
         "version_string": "2.0.0",
         "hash": "2e4ec0e8e880334342f33619c18c0cce"
+    },
+    "widget_display_avatar_explain.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "92133948955646b1bbc0608c1ee7d9ac"
     }
 }

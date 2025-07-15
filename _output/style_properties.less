@@ -6,6 +6,20 @@
 @xf-tpmBannerIcon3: @fa-var-solid-trophy;
 @xf-tpmSidebarIcon: @fa-var-trophy;
 
+.xf-tpmPosterCount()
+{
+	font-size: 10px;
+	color: @xf-textColor;
+	background: xf-intensify(@xf-contentBg, 3.5%);
+	border: @xf-borderSize solid xf-diminish(@xf-borderColor, 3%);
+	border-radius: 20px;
+	padding-top: 0;
+	padding-right: 3px;
+	padding-bottom: 0;
+	padding-left: 3px;
+	margin: -16px 0px 0px 22px;
+}
+
 .xf-tpmUserBanner1()
 {
 	color: @xf-textColor;
@@ -27,6 +41,16 @@
 	border: 1px solid @xf-borderColorFaint;
 }
 
+@xf-tpmPosterCount--font-size: 10px;
+@xf-tpmPosterCount--color: @xf-textColor;
+@xf-tpmPosterCount--background-color: xf-intensify(@xf-contentBg, 3.5%);
+@xf-tpmPosterCount--border-width: @xf-borderSize;
+@xf-tpmPosterCount--border-color: xf-diminish(@xf-borderColor, 3%);
+@xf-tpmPosterCount--border-radius: 20px;
+@xf-tpmPosterCount--padding-top: 0;
+@xf-tpmPosterCount--padding-right: 3px;
+@xf-tpmPosterCount--padding-bottom: 0;
+@xf-tpmPosterCount--padding-left: 3px;
 @xf-tpmUserBanner1--color: @xf-textColor;
 @xf-tpmUserBanner1--background-color: @xf-contentBg;
 @xf-tpmUserBanner1--border-width: 1px;

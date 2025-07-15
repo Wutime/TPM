@@ -1,0 +1,26 @@
+<hr class="formRowSep" />
+
+<xf:numberboxrow name="options[limit]" value="{$options.limit}" min="0"
+                 label="{{ phrase('maximum_entries') }}" />
+
+
+<xf:radiorow name="options[style]" value="{{ $options.style ?: 'simple' }}"
+             label="{{ phrase('display_style') }}">
+
+	<xf:option value="simple"
+               label="{{ phrase('simple') }}"
+               hint="{{ phrase('widget_display_simple_explain') }}" />
+	
+	<xf:option value="avatar"
+               label="{{ phrase('avatar') }}"
+               hint="{{ phrase('widget_display_avatar_explain') }}" />
+	
+    <xf:option value="compact"
+               label="{{ phrase('tpm_compact') }}"
+               hint="{{ phrase('tpm_display_style_compact_explain') }}" />
+	
+    <xf:option value="list"
+               label="{{ phrase('list') }}"
+               hint="{{ phrase('tpm_display_style_list_explain') }}" />
+	
+</xf:radiorow>
