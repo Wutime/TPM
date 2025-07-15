@@ -1,0 +1,13 @@
+{
+    "additional_files": [
+        "js/wutime/tpm/tpm.js",
+        "js/wutime/tpm/tpm.min.js"
+    ],
+    "exec": [
+        "uglifyjs _files/js/wutime/tpm/tpm.js -o _files/js/wutime/tpm/tpm.min.js",
+        "rm -rf _build/upload/src/addons/{addon_id}/*.sh",
+        "rm -rf _build/upload/src/addons/{addon_id}/*.txt",
+        "rm -rf _build/upload/src/addons/{addon_id}/changelog.txt",
+        "rm -rf _build/upload/src/addons/{addon_id}/LICENSE"
+    ]
+}

@@ -1,0 +1,1 @@
+Customize banner and trophy icon in <a href='admin.php?style-properties/'>style properties</a>.

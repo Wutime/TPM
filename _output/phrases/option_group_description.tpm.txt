@@ -1,0 +1,1 @@
+Displays top posters by date in a widget and supports a badge for top posters.

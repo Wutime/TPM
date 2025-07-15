@@ -1,0 +1,25 @@
+{
+    "legacy_addon_id": "",
+    "title": "[Wutime] Top Posters of the Month",
+    "description": "Displays top posters by date",
+    "version_id": 2000000,
+    "version_string": "2.0.0",
+    "dev": "Wutime",
+    "dev_url": "https://woocommerce.wutime.com/",
+    "faq_url": "",
+    "support_url": "",
+    "extra_urls": {
+        "Contact Wu": "https://woocommerce.wutime.com/contact/"
+    },
+    "require": {
+        "XF": [
+            2000010,
+            "XenForo 2.0.0+"
+        ],
+        "php": [
+            "5.4.0",
+            "PHP 5.4.0+"
+        ]
+    },
+    "icon": "logo.png"
+}

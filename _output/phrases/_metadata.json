@@ -1,0 +1,116 @@
+{
+    "cron_entry.tpmCron.txt": {
+        "global_cache": false,
+        "version_id": 20070,
+        "version_string": "1.4.0",
+        "hash": "0d3f0626c702e54efb03669b6aa413d8"
+    },
+    "option.tpm_excludeNodes.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "abc97de51bb938a664bd3a1ef4ec608c"
+    },
+    "option.tpm_limitTPM.txt": {
+        "global_cache": false,
+        "version_id": 20070,
+        "version_string": "1.4.0",
+        "hash": "32c207175fdb566b912b429bfba4f095"
+    },
+    "option.tpm_showBanner.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "dbbede874f69c2e6dba9bd527383ba68"
+    },
+    "option_explain.tpm_limitTPM.txt": {
+        "global_cache": false,
+        "version_id": 20070,
+        "version_string": "1.4.0",
+        "hash": "e63a6ec29ec0810fbd623e8852b85ed9"
+    },
+    "option_explain.tpm_showBanner.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "e4dd1f0a87b7f537ba95bbdced247a54"
+    },
+    "option_group.tpm.txt": {
+        "global_cache": false,
+        "version_id": 20070,
+        "version_string": "1.4.0",
+        "hash": "065b6fbcaae049d11fd0c486a28d5c09"
+    },
+    "option_group_description.tpm.txt": {
+        "global_cache": false,
+        "version_id": 20070,
+        "version_string": "1.4.0",
+        "hash": "a32dd44a65d5902454d98832339cb3b2"
+    },
+    "permission.general_viewTPM.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "481287849f41b8e6426d2e6b4f7f1c8b"
+    },
+    "style_prop.tpmBannerIcon.txt": {
+        "global_cache": false,
+        "version_id": 20070,
+        "version_string": "1.4.0",
+        "hash": "aca4794e0f5ca7fc927f56997e9db158"
+    },
+    "style_prop.tpmSidebarIcon.txt": {
+        "global_cache": false,
+        "version_id": 20070,
+        "version_string": "1.4.0",
+        "hash": "ee1d9b1e08d7bfa49eedc44fc63edd2d"
+    },
+    "style_prop.tpm_user_banner.txt": {
+        "global_cache": false,
+        "version_id": 20070,
+        "version_string": "1.4.0",
+        "hash": "e95bd85ed2967ca178ba1b66e80f2253"
+    },
+    "style_prop_desc.tpmBannerIcon.txt": {
+        "global_cache": false,
+        "version_id": 20070,
+        "version_string": "1.4.0",
+        "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "style_prop_desc.tpmSidebarIcon.txt": {
+        "global_cache": false,
+        "version_id": 20070,
+        "version_string": "1.4.0",
+        "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "style_prop_desc.tpm_user_banner.txt": {
+        "global_cache": false,
+        "version_id": 20070,
+        "version_string": "1.4.0",
+        "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "style_prop_group.tpm.txt": {
+        "global_cache": false,
+        "version_id": 20070,
+        "version_string": "1.4.0",
+        "hash": "6c5278ae3e70480cd5545b552b00ab01"
+    },
+    "style_prop_group_desc.tpm.txt": {
+        "global_cache": false,
+        "version_id": 20070,
+        "version_string": "1.4.0",
+        "hash": "67e965bf05f67075e36295c958374fba"
+    },
+    "tpm_banner_text.txt": {
+        "global_cache": false,
+        "version_id": 20070,
+        "version_string": "1.4.0",
+        "hash": "0a145bce0195914f4a8092a4b21af566"
+    },
+    "tpm_widget_title.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "0d3f0626c702e54efb03669b6aa413d8"
+    }
+}

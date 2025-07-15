@@ -1,0 +1,78 @@
+<xf:if is="$xf.visitor.canViewTPM()">
+    <div class="block"{{ widget_data($widget) }}>
+        <div class="block-container">
+            <h3 class="block-minorHeader">
+                <a href="{{ link('members/tpm') }}">
+                    {$title}
+                </a>
+            </h3>
+
+            <div class="js-TPMSidebar">
+                <xf:include template="tpm_sidebar_results" />
+            </div>
+
+            <xf:if is="$xf.visitor.canChangeTPMDate()">
+                <div class="block-footer">
+                    <xf:form action="{{ link('members/tpm/sidebar') }}" ajax="true" data-replace=".js-TPMSidebar" data-animate-replace="true" method="get">
+                        <ul class="tpm-controls">
+                            <li>
+                                <xf:select name="year" value="{$year_now}" class="tpm_year">
+                                    <xf:foreach loop="$years" value="$year">
+                                        <xf:option value="{$year}">{$year}</xf:option>
+                                    </xf:foreach>
+                                </xf:select>
+                            </li>
+                            <li>
+                                <xf:select name="month" value="{$month_now}" class="tpm_month">
+                                    <xf:foreach loop="$months" key="$number" value="$month">
+                                        <xf:option value="{$number}">{$month}</xf:option>
+                                    </xf:foreach>
+                                </xf:select>
+                            </li>
+                            <li>
+                                <xf:button type="submit">
+                                    {{ phrase('Go') }}
+                                </xf:button>
+                                <xf:hiddenval name="limit">{$limit}</xf:hiddenval>
+                                <xf:hiddenval name="style">{$style}</xf:hiddenval>
+                            </li>
+                        </ul>
+                    </xf:form>
+                </div>
+            </xf:if>
+        </div>
+    </div>
+
+</xf:if>
+
+<xf:macro name="tpm_user" arg-user="!">
+    <div class="contentRow">
+        <div class="contentRow-figure">
+            <xf:avatar user="$user.user" size="xs" />
+        </div>
+
+        <div class="contentRow-main contentRow-main--close">
+
+            <div class="contentRow-minor">
+                <span class="tmpCount" dir="auto">{{ phrase('tpm_this_month_x', {'total': {$user.value|number}}) }}</span>
+            </div>
+
+            <div class="contentRow-minor contentRow-minor--hideLinks">
+                <ul class="listInline listInline--bullet">
+                    <li>
+                        <dl class="pairs pairs--inline">
+                            <dt>{{ phrase('messages') }}</dt>
+                            <dd>{$user.user.message_count|number}</dd>
+                        </dl>
+                    </li>
+                    <li>
+                        <dl class="pairs pairs--inline">
+                            <dt>{{ phrase('likes') }}</dt>
+                            <dd>{$user.user.like_count|number}</dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</xf:macro>

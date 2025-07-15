@@ -1,0 +1,28 @@
+{
+    "group_name": "tpm",
+    "title": "TPM Banner Style",
+    "description": "",
+    "property_type": "css",
+    "css_components": [
+        "text",
+        "background",
+        "border",
+        "border_radius",
+        "padding",
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "has_variations": false,
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "color": "@xf-majorHeadingTextColor",
+        "background-color": "@xf-contentHighlightBg",
+        "border-width": "1px",
+        "border-color": "@xf-borderColorHighlight",
+        "border-radius": "2px",
+        "padding": "4px"
+    },
+    "display_order": 200
+}

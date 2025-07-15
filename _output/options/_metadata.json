@@ -1,0 +1,14 @@
+{
+    "tpm_excludeNodes.json": {
+        "hash": "8a749593fd14ac2841aa2e73fe724108"
+    },
+    "tpm_excludeUsers.json": {
+        "hash": "a30d7bf2aaa6143f4aeda15f6af3a9a2"
+    },
+    "tpm_limitTPM.json": {
+        "hash": "3775cf89f17b74b41980dfee0aec6558"
+    },
+    "tpm_showBanner.json": {
+        "hash": "bfad8fdcd155edb5f9888367ca54bd0d"
+    }
+}

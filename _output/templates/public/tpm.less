@@ -1,0 +1,22 @@
+// User banner (!!modify in style prorties)
+.userBanner.userBanner--tpm {
+    .xf-tpm_user_banner();
+    
+	<xf:if is="$xf.tpmBannerIcon != ''">
+		&:before {
+		.m-faContent(@xf-tpmBannerIcon, false); // Use the new style property variable
+		margin-right: @xf-paddingSmall;
+		}
+	</xf:if>
+}
+
+<xf:if is="$xf.tpmBannerIcon != ''">
+	// Widget title icon
+	.block[data-widget-definition="tpm_widget"] .block-minorHeader::before
+	{
+		.m-faContent(@xf-tpmBannerIcon, false); // Same variable for consistency
+		font-size: @xf-fontSizeLarge;
+		margin-right: (@xf-paddingMedium);
+		color: inherit;
+	}
+</xf:if>

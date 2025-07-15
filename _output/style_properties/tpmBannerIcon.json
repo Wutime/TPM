@@ -1,0 +1,14 @@
+{
+    "group_name": "tpm",
+    "title": "TPM Banner Icon",
+    "description": "",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "string",
+    "value_parameters": "",
+    "has_variations": false,
+    "depends_on": "",
+    "value_group": "",
+    "property_value": "@fa-var-trophy",
+    "display_order": 0
+}

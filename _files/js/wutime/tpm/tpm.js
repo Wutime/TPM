@@ -1,0 +1,100 @@
+(function (window, document) {
+    'use strict';document.addEventListener('DOMContentLoaded', () => {
+    XF.onDelegated(document, 'click', '[data-xf-click="tpmclicker"]', (e) => {
+        e.preventDefault();
+
+        const element = e.target.closest('[data-xf-click="tpmclicker"]');
+        if (!element) {
+            return;
+        }
+
+        const href = element.getAttribute('href');
+        if (!href) {
+            return;
+        }
+
+        const replaceSelector = element.dataset.replace;
+        if (!replaceSelector) {
+            return;
+        }
+
+        const animate = element.dataset.animateReplace !== 'false';
+        const cache = element.dataset.cache !== '0';
+
+        const year = document.querySelector('.tpm_year').value;
+        const month = document.querySelector('.tpm_month').value;
+        const limit = document.querySelector('.tpm_limit').value;
+        const style = document.querySelector('.tpm_style').value;
+
+        let params = {
+            year: year,
+            month: month,
+            limit: limit,
+            style: style
+        };
+
+        if (!cache) {
+            params._ = Date.now();
+        }
+
+        XF.ajax('get', href, params)
+            .then(data => {
+                if (!data.html) {
+                    return;
+                }
+
+                XF.setupHtmlInsert(data.html, (insertHtml, container, onReady) => {
+                    const replaceEl = document.querySelector(replaceSelector);
+                    if (!replaceEl) {
+                        return;
+                    }
+
+                    if (animate) {
+                        replaceEl.style.transition = `opacity ${XF.config.speed.fast}ms`;
+                        replaceEl.style.opacity = 1;
+
+                        setTimeout(() => {
+                            replaceEl.style.opacity = 0;
+                        }, 0);
+
+                        const fadeOutListener = () => {
+                            replaceEl.removeEventListener('transitionend', fadeOutListener);
+
+                            replaceEl.parentNode.insertBefore(insertHtml, replaceEl.nextSibling);
+
+                            insertHtml.style.display = 'none';
+                            insertHtml.style.transition = `opacity ${XF.config.speed.fast}ms`;
+                            insertHtml.style.opacity = 0;
+
+                            setTimeout(() => {
+                                insertHtml.style.display = '';
+                                insertHtml.style.opacity = 1;
+                            }, 0);
+
+                            const fadeInListener = () => {
+                                insertHtml.removeEventListener('transitionend', fadeInListener);
+                                if (onReady) {
+                                    onReady(true);
+                                }
+                            };
+
+                            insertHtml.addEventListener('transitionend', fadeInListener);
+
+                            replaceEl.remove();
+                        };
+
+                        replaceEl.addEventListener('transitionend', fadeOutListener);
+                    } else {
+                        replaceEl.parentNode.replaceChild(insertHtml, replaceEl);
+                        if (onReady) {
+                            onReady(true);
+                        }
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('AJAX error:', error);
+            });
+    });
+});})(window, document);
+

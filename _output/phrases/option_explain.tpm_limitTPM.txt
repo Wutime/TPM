@@ -1,0 +1,1 @@
+This will limit the number of top posters award for the month.

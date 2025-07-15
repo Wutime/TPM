@@ -1,0 +1,22 @@
+{
+    "public/tpm.less": {
+        "version_id": 20070,
+        "version_string": "1.4.0",
+        "hash": "26efa80964feae028766936cd61f2fd8"
+    },
+    "public/tpm_list.html": {
+        "version_id": 20070,
+        "version_string": "1.4.0",
+        "hash": "012e51e3afe68ea60f65b3e76ffa3ae5"
+    },
+    "public/tpm_sidebar_results.html": {
+        "version_id": 20070,
+        "version_string": "1.4.0",
+        "hash": "e70c1cbc3cc64bf0dd2ee086d075cb13"
+    },
+    "public/widget_tpm.html": {
+        "version_id": 20070,
+        "version_string": "1.4.0",
+        "hash": "08100638ef362b90ab7c0ec2370a7676"
+    }
+}

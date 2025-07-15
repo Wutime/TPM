@@ -1,0 +1,37 @@
+v2.0.0
+
+TPM port to resolve past issues
+
+proper XenForo 2.3.x Ajax handling with <xf:form> for widget
+smooth animation for widget updating
+made the banner style for Top Monthly Poster obey light/dark system in XF 2.3.6
+made the banner style a styleProperty() for ease of customization
+made the banner icon a style property (defaults to @fa-var-trophy)
+made the sidebar icon a style property (defaults to @fa-var-trophy)
+added phrase for tpm_banner_text for "Top Monthly Poster" to prevent wrap on small screens
+fixed css issues and ported them to XF 2.3.x
+fixed compact layout template to properly render "no results found"
+fixed all js errors (previous version had constant client-side JS errors in XF 2.3.x)
+fixed javascript path to a fully namespaced js route
+fixed widget title in installer to correctly use a phrase variable so the widget title is optional
+fixed "no results found" message for all layout styles (was missing for compact previously)
+fixed permission for "View TPM Page" to "View TPM" as it determines access to both the page and the widget
+added uglifyjs() to build minified JS automatically now that XF 2.3.x compilier no longer supports minification (EOL)
+
+Instructions:
+
+1) Uninstall previous TPM addons (No worries, you won't lose poster any poster data & weblinks have stayed the same for SEO)
+2) Install this Add-On
+3) Visit UserGroup permissions: admin.php?permissions/user-groups/registered.2/
+	* Click "registered users" (logged in users only) or "unregsitered/unconfirmed" (guests + users)
+	* Search "top"
+	* Enable [View "Top Posters of the Month" Page]
+	* Enable [Can change "Top Posters of the Month" Date]
+4) Done
+
+Customization:
+
+1) Visit settings: admin.php?options/groups/tpm/
+2) Visit widgets: admin.php?widgets/
+3) Visit style properties: admin.php?style-properties/
+

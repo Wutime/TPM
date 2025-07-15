@@ -1,0 +1,58 @@
+<xf:title page="{$page}">{{ phrase('nav.tpm') }}</xf:title>
+
+<xf:wrap template="member_wrapper">
+    <xf:set var="$pageSelected" value="tpm" />
+</xf:wrap>
+
+<xf:head option="metaNoindex"><meta name="robots" content="noindex" /></xf:head>
+<xf:macro template="metadata_macros" name="canonical_url" arg-canonicalUrl="{{ link('canonical:members/tpm', null, {'page': $page}) }}" />
+
+<xf:if is="$xf.visitor.canChangeTPMDate()">
+    <xf:pageaction>
+        <div class="buttonGroup">
+
+            <xf:form action="{{ link('members/tpm') }}" class="" method="get">
+
+                <ul class="tpm-controls">
+                    <li>
+                        <xf:select name="tpm_year" value="{$year_now}">
+                            <xf:foreach loop="$years" value="$year">
+                                <xf:option value="{$year}">{$year}</xf:option>
+                            </xf:foreach>
+                        </xf:select>
+                    </li>
+                    <li>
+                        <xf:select name="tpm_month" value="{$month_now}">
+                            <xf:foreach loop="$months" key="$number" value="$month">
+                                <xf:option value="{$number}">{$month}</xf:option>
+                            </xf:foreach>
+                        </xf:select>
+                    </li>
+                    <li>
+                        <button type="submit" class="button--primary button tpm-goButton"><span class="button-text">Go</span></button>
+                    </li>
+                </ul>
+            </xf:form>
+        </div>
+    </xf:pageaction>
+</xf:if>
+
+<div class="block">
+    <div class="block-container">
+        <ol class="block-body">
+            <xf:foreach loop="$user_datas" value="$user_data">
+                <li class="block-row block-row--separated">
+                    <xf:set var="$data">
+                        <a href="{{ link('members/post-content', $user_data.user, {'year': $year_now, 'month': $month_now}) }}">{$user_data.value}</a>
+                    </xf:set>
+
+                    <xf:macro template="member_list_macros" name="item" arg-user="{$user_data.user}" arg-extraData="{$data}" arg-extraDataBig="{$data}" />
+                </li>
+                <xf:else />
+                <li class="block-row">{{ phrase('no_users_match_specified_criteria') }}</li>
+            </xf:foreach>
+        </ol>
+    </div>
+
+    <xf:pagenav link="members/tpm" page="{$page}" perpage="{$perPage}" total="{$total}"  params="{$linkFilters}" wrapperclass="block-outer block-outer--after" />
+</div>

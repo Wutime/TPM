@@ -1,0 +1,66 @@
+<div class="js-TPMSidebar">
+    <xf:if is="{$style} == 'simple'">
+        <ul class="block-body">
+            <xf:if is="$user_datas is not empty">
+                <xf:foreach loop="$user_datas" value="$user">
+                    <li class="block-row">
+                        <xf:macro template="widget_tpm" name="tpm_user" arg-user="{$user}" />
+                    </li>
+                </xf:foreach>
+            <xf:else />
+                <li class="block-row block-row--minor">
+                    {{ phrase('no_results_found') }}
+                </li>
+            </xf:if>
+        </ul>
+
+    <xf:elseif is="{$style} == 'compact'" />
+        <ul class="block-body">
+            <xf:if is="$user_datas is not empty">
+                <xf:foreach loop="$user_datas" value="$user">
+                    <li class="block-row">
+                        <div class="contentRow">
+                            <div class="contentRow-figure">
+                                <xf:avatar user="$user.user" size="s" />
+                            </div>
+                            <div class="contentRow-main">
+                                <div class="contentRow-extra contentRow-extra--largest">
+                                    {$user.value|number}
+                                </div>
+                                <div class="contentRow-header">
+                                    <xf:username user="$user.user" rich="true" />
+                                </div>
+                                <div class="contentRow-lesser">
+                                    <xf:usertitle user="$user.user" />
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </xf:foreach>
+            <xf:else />
+                <li class="block-row block-row--minor">
+                    {{ phrase('no_results_found') }}
+                </li>
+            </xf:if>
+        </ul>
+
+    <xf:else />
+        <div class="block-row block-row--minor">
+            <ul class="listInline listInline--comma">
+                <xf:if is="$user_datas is not empty">
+                    <xf:foreach loop="$user_datas" value="$user">
+                        <xf:trim>
+                            <li>
+                                <xf:username user="$user.user" rich="true" /> {$user.value|number}
+                            </li>
+                        </xf:trim>
+                    </xf:foreach>
+                <xf:else />
+                    <li class="block-row block-row--minor">
+                        {{ phrase('no_results_found') }}
+                    </li>
+                </xf:if>
+            </ul>
+        </div>
+    </xf:if>
+</div>

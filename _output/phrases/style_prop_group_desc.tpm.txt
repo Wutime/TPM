@@ -1,0 +1,1 @@
+Properties for the banner and sidebar including icons.

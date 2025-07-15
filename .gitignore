@@ -1,0 +1,8 @@
+_data
+vendor
+hashes.json
+*.DS_Store
+LICENSE
+LICENSE.html
+*.tar.gz
+*.sh
